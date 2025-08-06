@@ -1,4 +1,3 @@
 export interface userType {
-    username: string,
-    password?: string
+    username: string
 }

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import bcrypt from "bcrypt"
 
 export interface UserDocument extends Document {
@@ -7,7 +7,7 @@ export interface UserDocument extends Document {
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
-const userSchema = new mongoose.Schema({
+const userSchema: Schema<UserDocument> = new Schema<UserDocument>({
   username: {
     type: String,
     required: true,

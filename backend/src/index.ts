@@ -4,7 +4,8 @@ import session from "express-session";
 
 import { useMongodbConfig } from "./config/mogodbConfig.ts";
 import { errorHandler } from "./middleware/errorHandler.ts";
-import userRouter from "./routers/user.router.ts"
+import userRouter from "./routes/user.route.ts"
+import jobRouter from "./routes/job.route.ts"
 
 dotenv.config();
 useMongodbConfig();
@@ -14,13 +15,14 @@ const port = process.env.PORT || 5000;
 
 app.use(
     session({
+        name: 'user_id',
         secret: process.env.SESSION_SECRET || 'super-secret',
         resave: false,
         saveUninitialized: false,
         cookie: {
             maxAge: 1000 * 60 * 60 * 24,
             httpOnly: true,
-            sameSite: true,
+            sameSite: "strict",
             secure: process.env.NODE_ENV === 'production',
         },
     })
@@ -28,7 +30,8 @@ app.use(
 app.use(express.json());
 
 app.use("/api/user", userRouter);
-app.use(errorHandler)
+app.use("/api/job", jobRouter);
+app.use(errorHandler);
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
