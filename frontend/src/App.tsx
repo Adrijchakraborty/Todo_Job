@@ -1,11 +1,27 @@
 import React from 'react'
-import Auth from './pages/Auth'
+import { Route, Routes } from 'react-router-dom'
+
+import ProtectedMain from './routes/ProtectedMain'
+import ProtectedAuth from './routes/ProtectedAuth'
+import { useAppHook } from './hooks/useAppHook'
+import Loader from './skeleton/Loader'
+import { AuthPage, MainPage } from './pages'
 
 const App: React.FC = () => {
+
+  useAppHook();
+
   return (
-    <div className="h-screen flex flex-col justify-center items-center bg-gray-100 font-poppins">
-      <Auth />
-    </div>
+    <React.Suspense fallback={<Loader/>}>
+      <Routes>
+        <Route element={<ProtectedMain />}>
+          <Route path='/' element={<MainPage />} />
+        </Route>
+        <Route element={<ProtectedAuth />}>
+          <Route path='/auth' element={<AuthPage />} />
+        </Route>
+      </Routes>
+    </React.Suspense>
   )
 }
 
