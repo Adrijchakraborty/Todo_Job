@@ -4,14 +4,14 @@ import { useApi } from './hooks/useApi';
 
 export interface AuthFormProps {
   formState: boolean;
-  setFormState?: () => void;
+  setFormState: () => void;
 }
 
 
 const AuthForm: React.FC<AuthFormProps> = ({ formState, setFormState }) => {
   const {content, handleToggle, isTransitioning} = useAnimation({formState, setFormState});
 
-  const {handleChange, handleSubmit} = useApi({formState});
+  const {handleChange, handleSubmit} = useApi({formState, setFormState});
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">

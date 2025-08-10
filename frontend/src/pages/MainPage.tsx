@@ -1,8 +1,13 @@
 import React from 'react'
+import { AddItems, DisplayItems, MainHeader } from '../components'
 
 const MainPage: React.FC = () => {
   return (
-    <div>MainPage</div>
+    <main>
+      <MainHeader/>
+      <AddItems/>
+      <DisplayItems/>
+    </main>
   )
 }
 

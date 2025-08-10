@@ -58,7 +58,7 @@ export const logout = (req: Request, res: Response, next: NextFunction) => {
             return next(new AppError("Logout failed", 500));
         }
         res.clearCookie('user_id');
-        res.json({ message: 'Logged out successfully' });
+        res.json( 'Logged out successfully' );
     });
 }
 

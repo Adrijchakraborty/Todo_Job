@@ -1,11 +1,10 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-import ProtectedMain from './routes/ProtectedMain'
-import ProtectedAuth from './routes/ProtectedAuth'
 import { useAppHook } from './hooks/useAppHook'
 import Loader from './skeleton/Loader'
 import { AuthPage, MainPage } from './pages'
+import { ProtectedAuth, ProtectedMain } from './routes'
 
 const App: React.FC = () => {
 

@@ -21,7 +21,7 @@ export const useAnimation = ({ formState, setFormState }: AuthFormProps) => {
             setTimeout(() => {
                 setFormState();
                 setIsTransitioning(false);
-            }, 300); // Reduced duration for snappier feel
+            }, 300);
         });
     }, [setFormState, isTransitioning]);
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import AuthForm from '../components/AuthComponents/AuthForm';
+import { AuthForm } from '../components';
 
 const AuthPage = () => {
   const [formState, setFormState] = useState<boolean>(false); // false = signin
