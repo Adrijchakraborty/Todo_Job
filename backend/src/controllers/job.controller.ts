@@ -4,7 +4,7 @@ import { AppError } from "../utils/AppError.ts";
 
 export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<JobDocument>, next: NextFunction) => {
     try {
-        const { title, company, description, dueDate, link } = req.body;
+        const { title, company, description, dueDate, link, status } = req.body;
 
         if (!title || !company || !dueDate || !link) {
             return next(new AppError("Please provide all required fields", 400));
@@ -16,9 +16,9 @@ export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<Jo
             description,
             dueDate,
             link,
+            status,
             userId: req.session.userId
         });
-
         res.status(201).json(newJob);
     } catch (error) {
         next(error);
@@ -36,8 +36,20 @@ export const getAll = async (req: Request<{}, {}, JobDocument>, res: Response<Jo
     }
 }
 
-export const getOne = async (req: Request<{}, {}, JobDocument>, res: Response<JobDocument>, next: NextFunction) => {
-    const { id } = req.params as {id: string};
+export const deleteOne = async (req: Request<{id : string}>, res: Response<JobDocument>, next: NextFunction) => {
+    const { id } = req.params;
+
+    try {
+        const job = await Job.findByIdAndDelete(id);
+        if (!job) return next(new AppError("No result", 404));
+        res.status(200).json(job);
+    } catch (error) {
+        next(error);
+    }
+}
+
+export const getOne = async (req: Request<{id: string}>, res: Response<JobDocument>, next: NextFunction) => {
+    const { id } = req.params;
 
     try {
         const job = await Job.findById(id);

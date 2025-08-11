@@ -17,7 +17,7 @@ type FormData = {
 
 
 
-export const useAddFormHook = ({handleClose}: Props) => {
+export const useAddFormHook = ({ handleClose }: Props) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [formData, setFormData] = useState<FormData>({
         title: '',
@@ -27,6 +27,8 @@ export const useAddFormHook = ({handleClose}: Props) => {
         link: '',
         status: 'To Do',
     });
+
+
 
     // Handle changes for all inputs
     const handleChange = (
@@ -42,7 +44,6 @@ export const useAddFormHook = ({handleClose}: Props) => {
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
         try {
             setLoading(true);
             await axios.post('/api/job/', formData)
@@ -70,5 +71,5 @@ export const useAddFormHook = ({handleClose}: Props) => {
 
     };
 
-    return {loading, formData,handleChange, handleSubmit}
+    return { loading, formData, handleChange, handleSubmit }
 }

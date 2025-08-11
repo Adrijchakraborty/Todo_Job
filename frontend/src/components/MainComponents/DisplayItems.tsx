@@ -1,46 +1,43 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+import DisplayCards from './sub_components/DisplayCards';
+import { useFetchJobs } from './hooks/useFetchJobs';
 
-interface Props {
-    title: string;
-    company: string;
-    description: string;
-    dueDate: Date;
-    link: string;
-    remarks?: string;
-    status: 'To Do' | 'In Progress' | 'Completed' | 'Blocked';
-}
 
 const DisplayItems: React.FC = () => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [jobData, setJobData] = useState<Props[] | null>(null);
 
-    useEffect(() => {
-        const fetchJobs = async () => {
-            try {
-                setLoading(true);
-                await axios.get("/api/job")
-                    .then((res) => {
-                        setJobData(res.data);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
-            } catch (error) {
-                console.log(error);
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-        fetchJobs();
-    }, [])
-    console.log(jobData);
-    return (
-        <div className='border grid grid-cols-1 lg:grid-cols-3 h-full'>
+  const { loading, jobData } = useFetchJobs();
 
+
+  return (
+    <section className="flex flex-1 h-full overflow-hidden">
+      {/* To Do */}
+      <section className="flex-1 flex flex-col p-4 overflow-hidden">
+        <h1 className="text-center font-bold text-xl mb-4">To Do</h1>
+        <div className="flex-1 overflow-y-auto">
+          {loading && <p className="text-center">Loading...</p>}
+          <DisplayCards jobData={jobData} status={'To Do'} bgColor={'bg-[var(--todo-bg)]'} />
         </div>
-    )
-}
+      </section>
 
-export default DisplayItems
+      {/* In Progress */}
+      <section className="flex-1 flex flex-col p-4 overflow-hidden">
+        <h1 className="text-center font-bold text-xl mb-4">In Progress</h1>
+        <div className="flex-1 overflow-y-auto">
+          {loading && <p className="text-center">Loading...</p>}
+          <DisplayCards jobData={jobData} status={'In Progress'} bgColor={'bg-[var(--progress-bg)]'} />
+        </div>
+      </section>
+
+      {/* Completed */}
+      <section className="flex-1 flex flex-col p-4 overflow-hidden">
+        <h1 className="text-center font-bold text-xl mb-4">Completed</h1>
+        <div className="flex-1 overflow-y-auto">
+          {loading && <p className="text-center">Loading...</p>}
+          <DisplayCards jobData={jobData} status={'Completed'} bgColor={'bg-[var(--completed-bg)]'} />
+        </div>
+      </section>
+    </section>
+  );
+};
+
+export default DisplayItems;
