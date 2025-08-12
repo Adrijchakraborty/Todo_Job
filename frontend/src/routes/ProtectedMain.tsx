@@ -1,6 +1,6 @@
 import React from 'react'
 import { Navigate, Outlet } from 'react-router-dom'
-import { useUserStore } from '../zustand/store';
+import { useUserStore } from '../zustand/userStore';
 
 const ProtectedMain: React.FC = () => {
     const user = useUserStore((state) => state.user);

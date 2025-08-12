@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useUserStore } from "../zustand/store";
+import { useUserStore } from "../zustand/userStore";
 import axios from "axios";
 
 export const useAppHook = () => {

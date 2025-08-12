@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useJobStore } from "../../../zustand/jobStore";
 
 interface Props {
     handleClose: () => void;
@@ -28,7 +29,7 @@ export const useAddFormHook = ({ handleClose }: Props) => {
         status: 'To Do',
     });
 
-
+    const addJob = useJobStore((state) => state.addJob);
 
     // Handle changes for all inputs
     const handleChange = (
@@ -47,7 +48,8 @@ export const useAddFormHook = ({ handleClose }: Props) => {
         try {
             setLoading(true);
             await axios.post('/api/job/', formData)
-                .then(() => {
+                .then((res) => {
+                    addJob(res.data)
                     toast.success("Job post Created!!");
                 })
                 .catch((err) => {

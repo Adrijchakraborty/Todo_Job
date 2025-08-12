@@ -5,8 +5,7 @@ import { useFetchJobs } from './hooks/useFetchJobs';
 
 const DisplayItems: React.FC = () => {
 
-  const { loading, jobData } = useFetchJobs();
-
+  const { loading } = useFetchJobs();
 
   return (
     <section className="flex flex-1 h-full overflow-hidden">
@@ -15,7 +14,7 @@ const DisplayItems: React.FC = () => {
         <h1 className="text-center font-bold text-xl mb-4">To Do</h1>
         <div className="flex-1 overflow-y-auto">
           {loading && <p className="text-center">Loading...</p>}
-          <DisplayCards jobData={jobData} status={'To Do'} bgColor={'bg-[var(--todo-bg)]'} />
+          <DisplayCards status={'To Do'} bgColor={'bg-[var(--todo-bg)]'} />
         </div>
       </section>
 
@@ -24,7 +23,7 @@ const DisplayItems: React.FC = () => {
         <h1 className="text-center font-bold text-xl mb-4">In Progress</h1>
         <div className="flex-1 overflow-y-auto">
           {loading && <p className="text-center">Loading...</p>}
-          <DisplayCards jobData={jobData} status={'In Progress'} bgColor={'bg-[var(--progress-bg)]'} />
+          <DisplayCards status={'In Progress'} bgColor={'bg-[var(--progress-bg)]'} />
         </div>
       </section>
 
@@ -33,7 +32,7 @@ const DisplayItems: React.FC = () => {
         <h1 className="text-center font-bold text-xl mb-4">Completed</h1>
         <div className="flex-1 overflow-y-auto">
           {loading && <p className="text-center">Loading...</p>}
-          <DisplayCards jobData={jobData} status={'Completed'} bgColor={'bg-[var(--completed-bg)]'} />
+          <DisplayCards status={'Completed'} bgColor={'bg-[var(--completed-bg)]'} />
         </div>
       </section>
     </section>

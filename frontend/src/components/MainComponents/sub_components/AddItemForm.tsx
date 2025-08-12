@@ -12,7 +12,7 @@ const AddItemForm: React.FC<ItemProps> = ({ show, handleClose }) => {
     const form_style =
         'mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
 
-    const {loading, formData,handleChange, handleSubmit} = useAddFormHook({handleClose})
+    const { loading, formData, handleChange, handleSubmit } = useAddFormHook({ handleClose });
 
     return (
         <>
@@ -112,7 +112,7 @@ const AddItemForm: React.FC<ItemProps> = ({ show, handleClose }) => {
                             {/* Submit */}
                             <div className="flex justify-end">
                                 <button
-                                disabled={loading}
+                                    disabled={loading}
                                     type="submit"
                                     className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition ${loading && 'cursor-not-allowed'}`}
                                 >

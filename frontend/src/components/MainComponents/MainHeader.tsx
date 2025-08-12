@@ -2,7 +2,7 @@ import React from 'react'
 import { IoLogOutOutline } from "react-icons/io5";
 import { CiLight, CiDark  } from "react-icons/ci";
 
-import { useUserStore } from '../../zustand/store'
+import { useUserStore } from '../../zustand/userStore'
 import "./styles/MainHeader.css"
 import { useTheme_logout } from './hooks/useTheme_logout';
 

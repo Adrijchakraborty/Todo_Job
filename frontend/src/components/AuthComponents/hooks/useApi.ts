@@ -3,7 +3,7 @@ import { useState } from "react"
 import toast from "react-hot-toast"
 import { type AuthFormProps } from "../AuthForm"
 import { registerData, signinData } from "./authData"
-import { useUserStore } from "../../../zustand/store"
+import { useUserStore } from "../../../zustand/userStore"
 
 type userdata = {
     "username": string;

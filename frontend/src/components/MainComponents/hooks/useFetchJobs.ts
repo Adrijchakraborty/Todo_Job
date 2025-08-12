@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { useJobStore } from "../../../zustand/jobStore";
 
 export interface DisplayProps {
     _id: string;
@@ -15,7 +16,7 @@ export interface DisplayProps {
 
 export const useFetchJobs = () => {
     const [loading, setLoading] = useState<boolean>(false);
-    const [jobData, setJobData] = useState<DisplayProps[]>([]);
+    const setJobData = useJobStore((state) => state.setJobData);
 
     const fetchJobs = async () => {
         try {
@@ -35,5 +36,5 @@ export const useFetchJobs = () => {
     }, []);
 
 
-    return { loading, jobData, setJobData }
+    return { loading }
 }
