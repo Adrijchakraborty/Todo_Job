@@ -5,7 +5,7 @@ const AuthPage = () => {
   const [formState, setFormState] = useState<boolean>(false); // false = signin
 
   return (
-    <div className="bg-gray-100 h-screen flex justify-center items-center">
+    <div className="bg-gray-100 h-[100dvh] flex justify-center items-center">
       <AuthForm
         formState={formState}
         setFormState={() => setFormState((prev) => !prev)}

@@ -38,9 +38,11 @@ const DisplayItems: React.FC = () => {
         <div className="flex-1 w-full overflow-y-auto p-4">
           {loading && <p className="text-center">Loading...</p>}
           <DisplayCards
+            key={statuses[currentIndex].label}
             status={statuses[currentIndex].label as 'To Do' | 'In Progress' | 'Completed'}
             bgColor={statuses[currentIndex].bg}
           />
+
         </div>
       </section>
 
