@@ -25,6 +25,32 @@ export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<Jo
     }
 }
 
+export const editOne = async (
+  req: Request<{ id: string }, {}, JobDocument>,
+  res: Response<JobDocument>,
+  next: NextFunction
+) => {
+  try {
+    const { title, company, description, dueDate, link, status } = req.body;
+    const { id } = req.params;
+
+    const editedJob = await Job.findByIdAndUpdate(
+      id,
+      { title, company, description, dueDate, link, status },
+      { new: true, runValidators: true }
+    );
+
+    if (!editedJob) {
+      return next(new AppError("No job found", 404));
+    }
+
+    res.status(200).json(editedJob);
+  } catch (error) {
+    next(error);
+  }
+};
+
+
 export const getAll = async (req: Request<{}, {}, JobDocument>, res: Response<JobDocument[]>, next: NextFunction) => {
     const user = req.session.userId;
 

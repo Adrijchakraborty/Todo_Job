@@ -4,7 +4,7 @@ export interface JobDocument extends Document {
   title: string;
   company: string;
   description?: string;
-  dueDate?: Date;
+  dueDate?: string;
   link?: string;
   remarks?: string;
   status: 'To Do' | 'In Progress' | 'Completed' | 'Blocked';
@@ -18,7 +18,7 @@ const jobSchema: Schema<JobDocument> = new Schema<JobDocument>(
     title: { type: String, required: true },
     company: {type: String, required: true},
     description: { type: String },
-    dueDate: { type: Date },
+    dueDate: { type: String },
     link: { type: String },
     remarks: { type: String },
     status: {

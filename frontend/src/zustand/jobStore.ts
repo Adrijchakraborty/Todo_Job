@@ -5,7 +5,7 @@ interface JobProps {
   title: string;
   company: string;
   description: string;
-  dueDate: Date;
+  dueDate: string;
   link: string;
   remarks?: string;
   status: 'To Do' | 'In Progress' | 'Completed' | 'Blocked';

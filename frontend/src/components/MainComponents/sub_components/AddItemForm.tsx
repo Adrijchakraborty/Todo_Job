@@ -1,18 +1,20 @@
 import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useAddFormHook } from '../hooks/useAddFormHook';
+import type { DisplayProps } from '../hooks/useFetchJobs';
 
 interface ItemProps {
     show: boolean;
     handleClose: () => void;
+    initialData?: DisplayProps
 }
 
 
-const AddItemForm: React.FC<ItemProps> = ({ show, handleClose }) => {
+const AddItemForm: React.FC<ItemProps> = ({ show, initialData, handleClose }) => {
     const form_style =
         'mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
 
-    const { loading, formData, handleChange, handleSubmit } = useAddFormHook({ handleClose });
+    const { loading, formData, handleChange, handleSubmit } = useAddFormHook({ initialData , handleClose });
 
     return (
         <>

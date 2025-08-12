@@ -3,7 +3,7 @@ import { AddItems, DisplayItems, MainHeader } from '../components'
 
 const MainPage: React.FC = () => {
   return (
-    <main className='h-screen flex flex-col'>
+    <main className='h-[100dvh] max-w-[1440px] mx-auto flex flex-col'>
       <MainHeader/>
       <AddItems/>
       <DisplayItems/>
