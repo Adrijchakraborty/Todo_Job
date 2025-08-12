@@ -1,1 +1,1 @@
-{"root":["./src/index.ts"],"version":"5.9.2"}
+{"root":["./src/index.ts","./src/config/mogodbconfig.ts","./src/controllers/job.controller.ts","./src/controllers/user.controller.ts","./src/middleware/errorhandler.ts","./src/middleware/protected.ts","./src/models/job.model.ts","./src/models/user.model.ts","./src/routes/job.route.ts","./src/routes/user.route.ts","./src/types/express-session.d.ts","./src/types/user.ts","./src/utils/apperror.ts"],"version":"5.9.2"}
