@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(),tailwindcss(),],
   server: {
     proxy: {
-      '/api' : "http://localhost:3000" //http://localhost:3000 //https://todo-job.onrender.com
+      '/api' : "https://job-traker-yy1w.onrender.com" //http://localhost:3000 //https://job-traker-yy1w.onrender.com
     }
   }
 })
