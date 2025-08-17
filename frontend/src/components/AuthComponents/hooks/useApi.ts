@@ -17,6 +17,7 @@ export const useApi = ({ formState }: AuthFormProps) => {
         "password": "",
         "confirm password": ""
     })
+    const [loading,setLoading] = useState<boolean>(false);
 
     const setUser = useUserStore((state)=>state.setUser)
 
@@ -36,6 +37,7 @@ export const useApi = ({ formState }: AuthFormProps) => {
         const url = formState ? registerData.apiUrl : signinData.apiUrl;
         const successful = formState ? registerData.successMessage : signinData.successMessage;
         try {
+            setLoading(true);
             await axios.post(url, formData)
                 .then((res) => {
                     setUser(res.data);
@@ -50,8 +52,11 @@ export const useApi = ({ formState }: AuthFormProps) => {
                 toast.error("An unexpected error occurred.");
             }
         }
+        finally {
+            setLoading(false);
+        }
 
     }
 
-    return { handleChange, handleSubmit }
+    return { loading, handleChange, handleSubmit }
 }

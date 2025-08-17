@@ -9,9 +9,9 @@ export interface AuthFormProps {
 
 
 const AuthForm: React.FC<AuthFormProps> = ({ formState, setFormState }) => {
-  const {content, handleToggle, isTransitioning} = useAnimation({formState, setFormState});
+  const { content, handleToggle, isTransitioning } = useAnimation({ formState, setFormState });
 
-  const {handleChange, handleSubmit} = useApi({formState, setFormState});
+  const { loading, handleChange, handleSubmit } = useApi({ formState, setFormState });
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">
@@ -62,7 +62,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ formState, setFormState }) => {
 
               <button
                 type="submit"
-                disabled={isTransitioning}
+                disabled={loading || isTransitioning}
                 className="w-full bg-gradient-to-r from-green-500 to-green-600 
                          hover:from-green-600 hover:to-green-700 
                          disabled:from-gray-400 disabled:to-gray-500
@@ -74,7 +74,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ formState, setFormState }) => {
                          disabled:cursor-not-allowed"
               >
                 <span className="inline-block transition-transform duration-150">
-                  {content.button}
+                  {loading ? "Loading" :  content.button}
                 </span>
               </button>
             </form>
