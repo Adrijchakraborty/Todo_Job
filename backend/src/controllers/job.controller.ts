@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import { Job, type JobDocument } from "../models/job.model.ts";
-import { AppError } from "../utils/AppError.ts";
+import { Job, type JobDocument } from "../models/job.model.js";
+import { AppError } from "../utils/AppError.js";
 
 export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<JobDocument>, next: NextFunction) => {
     try {

@@ -1,6 +1,6 @@
 import express from "express"
-import { requireAuth } from "../middleware/protected.ts";
-import { addNew, deleteOne, editOne, getAll, getOne } from "../controllers/job.controller.ts";
+import { requireAuth } from "../middleware/protected.js";
+import { addNew, deleteOne, editOne, getAll, getOne } from "../controllers/job.controller.js";
 
 const router = express.Router();
 

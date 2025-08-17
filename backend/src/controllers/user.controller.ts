@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import type { userType } from "../types/user.ts";
-import { User, type UserDocument } from "../models/user.model.ts";
-import { AppError } from "../utils/AppError.ts";
+import type { userType } from "../types/user.js";
+import { User, type UserDocument } from "../models/user.model.js";
+import { AppError } from "../utils/AppError.js";
 
 export const register = async (req: Request<{}, {}, UserDocument>, res: Response<userType>, next: NextFunction) => {
     const { username, password } = req.body;

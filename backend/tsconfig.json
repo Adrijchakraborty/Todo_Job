@@ -7,20 +7,10 @@
     "types": ["node"],
     "sourceMap": true,
     "declaration": true,
-    "declarationMap": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
     "strict": true,
     "jsx": "react-jsx",
     "verbatimModuleSyntax": true,
     "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
-    "composite": true
-  },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+    "skipLibCheck": true
+  }
 }

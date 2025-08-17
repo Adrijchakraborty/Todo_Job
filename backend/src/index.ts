@@ -2,10 +2,10 @@ import express from "express"
 import dotenv from "dotenv"
 import session from "express-session";
 
-import { useMongodbConfig } from "./config/mogodbConfig.ts";
-import { errorHandler } from "./middleware/errorHandler.ts";
-import userRouter from "./routes/user.route.ts"
-import jobRouter from "./routes/job.route.ts"
+import { useMongodbConfig } from "./config/mogodbConfig.js";
+import { errorHandler } from "./middleware/errorHandler.js";
+import userRouter from "./routes/user.route.js"
+import jobRouter from "./routes/job.route.js"
 
 dotenv.config();
 useMongodbConfig();
