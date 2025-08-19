@@ -1,6 +1,13 @@
 import type { NextFunction, Request, Response } from "express";
+import dotenv from "dotenv"
 import { Job, type JobDocument } from "../models/job.model.js";
 import { AppError } from "../utils/AppError.js";
+
+dotenv.config();
+
+import Groq from "groq-sdk";
+
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<JobDocument>, next: NextFunction) => {
     try {
@@ -24,6 +31,46 @@ export const addNew = async (req: Request<{}, {}, JobDocument>, res: Response<Jo
         next(error);
     }
 }
+
+export const extractJobWithAI = async (
+  req: Request<{}, {}, { aiContent?: string }>,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { aiContent } = req.body;
+
+    if (!aiContent) {
+      return next(new AppError("Please provide job description text", 400));
+    }
+
+    const chatCompletion = await groq.chat.completions.create({
+      model: "llama-3.1-8b-instant",
+      messages: [
+        {
+          role: "system",
+          content: `You are an assistant that extracts structured job details.
+Return ONLY valid JSON with fields:
+{ "title": string, "company": string, "description": string, "dueDate"?: string (YYYY-MM-DD) | empty, "link": string }`
+        },
+        {
+          role: "user",
+          content: `Extract job details from the following content:\n\n${aiContent}`
+        }
+      ],
+      temperature: 0
+    });
+
+    const output = chatCompletion.choices[0]?.message?.content || "{}";
+    const aiData = JSON.parse(output);
+
+    res.json(aiData);
+  } catch (error) {
+    console.error(error);
+    next(new AppError("Please provide valid details", 400));
+  }
+};
+
 
 export const editOne = async (
   req: Request<{ id: string }, {}, JobDocument>,
