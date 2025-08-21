@@ -74,7 +74,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ formState, setFormState }) => {
                          disabled:cursor-not-allowed"
               >
                 <span className="inline-block transition-transform duration-150">
-                  {loading ? "Loading" :  content.button}
+                  {loading ? "Loading..." :  content.button}
                 </span>
               </button>
             </form>

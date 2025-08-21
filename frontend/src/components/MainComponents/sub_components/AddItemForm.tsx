@@ -14,13 +14,13 @@ const AddItemForm: React.FC<ItemProps> = ({ show, initialData, handleClose }) =>
     const form_style =
         'mt-1 w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400';
 
-    const { loading, formData, handleChange, handleSubmit } = useAddFormHook({ initialData , handleClose });
+    const { loading, formData, handleChange, handleSubmit, setAiData, handleAiDataSubmit } = useAddFormHook({ initialData, handleClose });
 
     return (
         <>
             {show && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="bg-white text-black p-6 rounded-lg shadow-lg w-full max-w-lg relative">
+                    <div className="bg-white text-black p-6 rounded-lg shadow-lg w-full max-w-lg relative max-h-[95%] md:max-h-[80%] overflow-scroll">
                         {/* Close Button */}
                         <button
                             onClick={handleClose}
@@ -31,6 +31,24 @@ const AddItemForm: React.FC<ItemProps> = ({ show, initialData, handleClose }) =>
 
                         {/* Form */}
                         <h2 className="text-2xl font-semibold mb-4">Add a Job</h2>
+                        <form onSubmit={handleAiDataSubmit}>
+                            <label className="block text-sm font-medium">Parse using AI</label>
+                            <input
+                                type="text"
+                                name="ai"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAiData(e.target.value)}
+                                className={form_style}
+                                required
+                            />
+                            <button type='submit' className='mt-2 px-2 py-1 rounded-md bg-gray-300'>
+                                {loading ? "Parsing..." : "Parse"}
+                            </button>
+                        </form>
+                        <div className='flex justify-center items-center gap-3 py-3'>
+                            <span className='flex-1 border-b'></span>
+                            <span>or</span>
+                            <span className='flex-1 border-b'></span>
+                        </div>
                         <form className="space-y-4" onSubmit={handleSubmit}>
                             {/* Title & Company */}
                             <div className="flex gap-3">

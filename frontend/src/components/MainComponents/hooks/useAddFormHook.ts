@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useJobStore } from "../../../zustand/jobStore";
 import type { DisplayProps } from "./useFetchJobs";
@@ -17,7 +17,7 @@ interface FormData {
 
 interface Props {
     handleClose: () => void;
-    initialData?: Partial<DisplayProps>
+    initialData?: DisplayProps
 }
 
 export const useAddFormHook = ({ handleClose, initialData }: Props) => {
@@ -31,8 +31,46 @@ export const useAddFormHook = ({ handleClose, initialData }: Props) => {
         status: initialData?.status || 'To Do',
     });
 
+    //ai parse data
+    const [aiData, setAiData] = useState<string>("");
+    const [formDataAI, setFormDataAi] = useState<DisplayProps>({
+        _id: '',
+        title: '',
+        company: '',
+        description: '',
+        dueDate: '',
+        link: '',
+        status: 'To Do',
+    });
+
+    if (!initialData) initialData = formDataAI;
+
     const addJob = useJobStore((state) => state.addJob);
     const deleteJob = useJobStore((state) => state.deleteJob);
+
+    useEffect(() => {
+        initialData && setFormData(initialData);
+    }, [initialData])
+
+    //ai data parsing
+    const handleAiDataSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            setLoading(true);
+            await axios.post("/api/job/ai", { aiContent: aiData })
+                .then((res) => {
+                    setFormDataAi(res.data);
+                })
+                .catch((err) => {
+                    throw new Error(err);
+                })
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
 
     // Handle changes for all inputs
     const handleChange = (
@@ -106,8 +144,8 @@ export const useAddFormHook = ({ handleClose, initialData }: Props) => {
     // Handle form submission
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        initialData ? formEdit() : formSubmit();
+        initialData?._id ? formEdit() : formSubmit();
     };
 
-    return { loading, formData, handleChange, handleSubmit }
+    return { loading, formData, handleChange, handleSubmit, setAiData, handleAiDataSubmit }
 }
